@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>hc_5.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="1-html-%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%81%AE%E4%BD%9C%E6%88%901">1. HTML ファイルの作成(1)</h1>
+<p>これまでに HTML、CSS、jQuery を学習して来ました。<br>
+第 5 回では、実際の web ページを構成して行きましょう。<br>
+作成するのは、ポートフォリオサイトです。</p>
+<h3 id="%E2%97%8F-%E3%83%9D%E3%83%BC%E3%83%88%E3%83%95%E3%82%A9%E3%83%AA%E3%82%AA%E3%81%A8%E3%81%AF">● ポートフォリオとは</h3>
+<p>「どんなサイトを作れるのか」「どんなスキルを持っているのか」について、<br>
+クライアントに分かりやすく伝える資料や作品集の事を指します。</p>
+<img src="portfolio02.png">
+<br>
+<br>
+<h3 id="%E2%97%8F-%E3%83%9D%E3%83%BC%E3%83%88%E3%83%95%E3%82%A9%E3%83%AA%E3%82%AA%E3%82%B5%E3%82%A4%E3%83%88%E3%81%AE%E4%BD%9C%E6%88%90">● ポートフォリオサイトの作成</h3>
+<p>サイトのテーマは「個人のポートフォリオ」です。<br>
+具体的には「Top」「About」「Work」「Contact」の<br>
+4 ページ構成を目標とします。</p>
+<br>
+<h3 id="%E2%97%8F-%E3%83%87%E3%82%A3%E3%83%AC%E3%82%AF%E3%83%88%E3%83%AA%E6%A7%8B%E9%80%A0">● ディレクトリ構造</h3>
+<p>Web サイトを作成するには、 html、CSS、Javascript の<br>
+ファイルと、画像を適切な場所に保存する必要があります。<br>
+この時、ディレクトリ構造が用いられます。これは「フォルダ」<br>
+と「ファイル」の関係と同じで、Web ページを構成する際は<br>
+ファイルの場所をきちんと指定する必要があります。</p>
+<img src="directory.png">
+<h3 id="%E2%97%8F-%E7%B5%B6%E5%AF%BE%E3%83%91%E3%82%B9%E3%81%A8%E7%9B%B8%E5%AF%BE%E3%83%91%E3%82%B9">● 絶対パスと相対パス</h3>
+<p>ディレクトリ構造内の位置を指定する方法として、「絶対パス」と<br>
+「相対パス」があります。フォルダを開いた際に上の方に出てくる<br>
+アドレスが絶対パスです。相対パスは、あるファイルまたは<br>
+フォルダからの位置関係で記述します。「../」と記述すると<br>
+1 つ上の階層を示し、ファイルまたはフォルダの名前を「/」で<br>
+区切る事で目的のディレクトリを指定します。</p>
+<br>
+<div style="height:12px;">
+<span style="margin-left:8px; padding:6px 10px; background:lightgreen; color:black; font-weight:bold;border-radius:5px;-webkit-border-radius:5px;-moz-border-radius:5px;">演習 1</span>
+</div>
+<div style="border:3px solid lightgreen; padding:25px 12px 10px; font-size:0.85em;border-radius:5px;-webkit-border-radius:5px;-moz-border-radius:5px;">
+以下の内容でディレクトリを作成しましょう。<br>
+(1) デスクトップに Portfolioフォルダを作成<br>
+(2) Portfolioフォルダの中に HTML, CSS, JS, IMGの 4つのフォルダを作成 <br>
+</div>
+<br>
+<h3 id="%E2%97%8F-%E3%82%A8%E3%83%87%E3%82%A3%E3%82%BF%E3%81%AE%E6%93%8D%E4%BD%9C">● エディタの操作</h3>
+<h4 id="visual-studio-code-%E3%81%A8%E3%81%AF">Visual Studio Code とは</h4>
+<p>プログラミングに使用するソフトには「エディタ」と「IDE(総合環境)」が<br>
+あります。今回は Microsoft 社製のエディタ「Visual Studio Code」を<br>
+使って行きます。</p>
+<br>
+<h3 id="%E2%97%8F-tophtml-stylecss-jqueryjs-%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%81%AE%E4%BD%9C%E6%88%90">● top.html, style.css, jquery.js ファイルの作成</h3>
+<p>以下の演習を実施し、各フォルダにファイルを作成しましょう。</p>
+<div style="height:12px;">
+<span style="margin-left:8px; padding:6px 10px; background:lightgreen; color:black; font-weight:bold;border-radius:5px;-webkit-border-radius:5px;-moz-border-radius:5px;">課題 2</span>
+</div>
+<div style="border:3px solid lightgreen; padding:25px 12px 10px; font-size:0.85em;border-radius:5px;-webkit-border-radius:5px;-moz-border-radius:5px;">
+<p>・Visual Studio Code の左上にあるファイル(F)をクリック<br>
+・フォルダを開く をクリック<br>
+・デスクトップに保存した Portfolio フォルダを選択<br>
+・左のメニューから HTML フォルダをクリック<br>
+・右クリックしてから「新しいファイル」をクリック<br>
+・テキストボックスに top.html を入力して Enter<br></p>
+<p>・同様に、CSS フォルダには style.css、<br>
+・JS フォルダには jquery.js ファイルを作成する。<br></p>
+</div>
+<br>
+<h3 id="%E2%97%8F-tophtml-%E3%81%AE%E3%82%B3%E3%83%BC%E3%83%87%E3%82%A3%E3%83%B3%E3%82%B0">● top.html のコーディング</h3>
+<p>次に、top.html をコーディングして行きましょう。<br>
+CSS は link タグ、jQuery は script タグで、ファイルの<br>
+ディレクトリを指定します。また、jQuery は CDN(外部の<br>
+サーバからファイルを呼び出す方法)を利用します。</p>
+<br>
+<div style="height:12px;">
+<span style="margin-left:8px; padding:6px 10px; background:lightgreen; color:black; font-weight:bold;border-radius:5px;-webkit-border-radius:5px;-moz-border-radius:5px;">演習 3</span>
+</div>
+<div style="border:3px solid lightgreen; padding:25px 12px 10px; font-size:0.85em;border-radius:5px;-webkit-border-radius:5px;-moz-border-radius:5px;">
+以下のコードを記述しましょう。この時、<br>
+(1) href="" 内に style.cssファイルのパス(相対パス)<br>
+(2) src="" 内に jQueryサーバーURL：
+<a href ="https://developers.google.com/speed/libraries#ext-core" target="_blank">Google Hosted Libraries</a><br>
+※ 上記リンクへ移動した後、ページ内の Libraries 配下にある jQueryサーバーURLをコピーする。<br>
+(3) src="" 内に jquery.jsファイルのパス(相対パス)<br>
+を埋める事。
+<p>[html]</p>
+<pre class="hljs"><code><div><span class="hljs-meta">&lt;!DOCTYPE <span class="hljs-meta-keyword">html</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">html</span> <span class="hljs-attr">lang</span>=<span class="hljs-string">"ja"</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">charset</span>=<span class="hljs-string">"UTF-8"</span> /&gt;</span>
+
+    <span class="hljs-comment">&lt;!-- (1) link:css + Tabキー → href="" の中を書き換え --&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">link</span> <span class="hljs-attr">rel</span>=<span class="hljs-string">"stylesheet"</span> <span class="hljs-attr">href</span>=<span class="hljs-string">""</span> /&gt;</span>
+
+    <span class="hljs-comment">&lt;!-- (2) jQueryのCDN--&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">""</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+
+    <span class="hljs-comment">&lt;!-- (3) jqueryファイルのリンク--&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"text/javascript"</span> <span class="hljs-attr">src</span>=<span class="hljs-string">""</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+
+    <span class="hljs-tag">&lt;<span class="hljs-name">title</span>&gt;</span>TOP Page<span class="hljs-tag">&lt;/<span class="hljs-name">title</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>test<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span>
+</div></code></pre>
+<br>
+</div>
+<section>
+    <details close>
+        <summary>回答</summary>
+        (1) ../css/style.css<br>
+        (2) https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js<br>
+        (3) ../js/jquery.js<br>
+    </details>
+</section>
+<br>
+<h3 id="%E2%97%8F-html-%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%81%AE%E8%A4%87%E8%A3%BD">● html ファイルの複製</h3>
+<p>先程は Visual Studio Code からファイルを作成しましたが、<br>
+今回は top.html ファイルをコピーして 3 ファイルを作成します。<br>
+(html などの基本タグ、style.css へのリンク、jquery.js<br>
+へのリンクが各 html ファイルに必要なためです)</p>
+<br>
+<div style="height:12px;">
+<span style="margin-left:8px; padding:6px 10px; background:lightgreen; color:black; font-weight:bold;border-radius:5px;-webkit-border-radius:5px;-moz-border-radius:5px;">演習 4</span>
+</div>
+<div style="border:3px solid lightgreen; padding:25px 12px 10px; font-size:0.85em;border-radius:5px;-webkit-border-radius:5px;-moz-border-radius:5px;">
+HTMLフォルダ内に、次の 3つファイルを作成しましょう。 <br>
+この時、top.htmlファイルをコピーして複製する事。<br>
+<blockquote>
+<p>about.html<br>
+works.html<br>
+contact.html<br></p>
+</blockquote>
+</div>
+<br>
+<h3 id="%E2%97%8Fstylecss-%E3%81%A8-jqueryjs-%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%81%AE%E3%83%86%E3%82%B9%E3%83%88%E3%82%B3%E3%83%BC%E3%83%87%E3%82%A3%E3%83%B3%E3%82%B0">●style.css と jquery.js ファイルのテストコーディング</h3>
+<p>html ファイルと CSS ファイル及び JavaScript ファイルが<br>
+リンクされているかを確認しましょう。</p>
+<br>
+<div style="height:12px;">
+<span style="margin-left:8px; padding:6px 10px; background:lightgreen; color:black; font-weight:bold;border-radius:5px;-webkit-border-radius:5px;-moz-border-radius:5px;">演習 5</span>
+</div>
+<div style="border:3px solid lightgreen; padding:25px 12px 10px; font-size:0.85em;border-radius:5px;-webkit-border-radius:5px;-moz-border-radius:5px;">
+以下のコードを CSSファイルと JSファイルにそれぞれ記述し、結果を確認しましょう。<br>
+(top.htmlファイルをChromeで開くと結果を表示できます)<br>
+<p>[CSS]</p>
+<pre class="hljs"><code><div><span class="hljs-selector-tag">p</span> {
+  <span class="hljs-attribute">color</span>: red;
+}
+</div></code></pre>
+<p>[Javascript]</p>
+<pre class="hljs"><code><div>$(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">{
+$(<span class="hljs-string">"p"</span></span>).<span class="hljs-title">css</span>(<span class="hljs-params"><span class="hljs-string">"font-size"</span>, <span class="hljs-string">"50px"</span></span>);
+}));
+</span></div></code></pre>
+</div>
+<br>
+<hr>
+<p><br><br><br></p>
+<h1 id="2-html-%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%81%AE%E4%BD%9C%E6%88%902">2. HTML ファイルの作成(2)</h1>
+<p>前の章では 各ファイルの大枠を作成しました。この章では、<br>
+TOP ページと About ページをコーディングして行きます。</p>
+<br>
+<h3 id="%E2%97%8F-top-%E3%83%9A%E3%83%BC%E3%82%B8%E3%81%AE%E3%82%B3%E3%83%BC%E3%83%87%E3%82%A3%E3%83%B3%E3%82%B0">● TOP ページのコーディング</h3>
+<p>TOP ページでは、別のページへのリンクを作成します。構成は以下の通りです。</p>
+<blockquote>
+<p>・About へのリンク<br>
+・Works へのリンク<br>
+・Contact へのリンク<br>
+また、画面の背景も設定します。今回はシンプルに<br></p>
+</blockquote>
+<p>上記を表示させ、更にリンク先のディレクトリを連携させます。<br>
+それでは、演習を進めましょう。<br>
+<br></p>
+<div style="height:12px;">
+<span style="margin-left:8px; padding:6px 10px; background:lightgreen; color:black; font-weight:bold;border-radius:5px;-webkit-border-radius:5px;-moz-border-radius:5px;">演習 1</span>
+</div>
+<div style="border:3px solid lightgreen; padding:25px 12px 10px; font-size:0.85em;border-radius:5px;-webkit-border-radius:5px;-moz-border-radius:5px;">
+以下のコードを top.htmlファイルの body内と、style.cssファイルに記述しましょう。<br>
+また、href="" 内には第一章で作成した各htmlファイルのディレクトリを記入します。
+<p>[html]</p>
+<pre class="hljs"><code><div><span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"container"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">ul</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"about box"</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">li</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"menu"</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">""</span> <span class="hljs-attr">target</span>=<span class="hljs-string">"_blank"</span>&gt;</span>About<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">li</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"menu"</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">""</span> <span class="hljs-attr">target</span>=<span class="hljs-string">"_blank"</span>&gt;</span>Works<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">li</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"menu"</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">""</span> <span class="hljs-attr">target</span>=<span class="hljs-string">"_blank"</span>&gt;</span>Contact<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
+</div></code></pre>
+<p>[CSS]</p>
+<pre class="hljs"><code><div><span class="hljs-selector-tag">body</span> {
+  <span class="hljs-comment">/*目に優しい白系の配色*/</span>
+  <span class="hljs-attribute">background-color</span>: ghostwhite;
+}
+<span class="hljs-selector-class">.container</span> {
+  <span class="hljs-comment">/*FlexBoxでコンテンツを中央配置する*/</span>
+  <span class="hljs-attribute">height</span>: <span class="hljs-number">800px</span>;
+  <span class="hljs-attribute">display</span>: flex;
+  <span class="hljs-attribute">justify-content</span>: center;
+  <span class="hljs-attribute">align-items</span>: center;
+}
+<span class="hljs-selector-tag">ul</span><span class="hljs-selector-class">.about</span> {
+  <span class="hljs-comment">/*リストの中点を非表示にする*/</span>
+  <span class="hljs-attribute">list-style</span>: none;
+  <span class="hljs-attribute">font-size</span>: <span class="hljs-number">40px</span>;
+}
+<span class="hljs-selector-tag">li</span><span class="hljs-selector-class">.menu</span> {
+  <span class="hljs-attribute">padding</span>: <span class="hljs-number">30px</span>;
+}
+</div></code></pre>
+</div>
+<br>
+<section>
+    <details close>
+        <summary>回答</summary>
+        (1) about.html<br>
+        (2) works.html<br>
+        (3) contact.html<br>
+    </details>
+</section>
+<br>
+<h3 id="%E2%97%8F-about-%E3%83%9A%E3%83%BC%E3%82%B8%E3%81%AE%E3%82%B3%E3%83%BC%E3%83%87%E3%82%A3%E3%83%B3%E3%82%B0">● About ページのコーディング</h3>
+<p>about ページでは、自己紹介の内容を記述して行きます。<br>
+自分の名前や所属団体、仕事内容やパーソナル情報を<br>
+記載していきます。</p>
+<br>
+<div style="height:12px;">
+<span style="margin-left:8px; padding:6px 10px; background:lightgreen; color:black; font-weight:bold;border-radius:5px;-webkit-border-radius:5px;-moz-border-radius:5px;">演習 2</span>
+</div>
+<div style="border:3px solid lightgreen; padding:25px 12px 10px; font-size:0.85em;border-radius:5px;-webkit-border-radius:5px;-moz-border-radius:5px;">
+以下のコードを about.htmlファイルの body内と、style.cssファイルに記述しましょう。<br>
+また、imgタグ内の src=""には好きな画像のパスを、名前・仕事・趣味は<br>
+自分のプロフィールを入力しましょう。<br>
+(今回はIMGフォルダにいくつかサンプルを保存しています)<br>
+<p>[html]</p>
+<pre class="hljs"><code><div><span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"about_img"</span> <span class="hljs-attr">src</span>=<span class="hljs-string">""</span> <span class="hljs-attr">alt</span>=<span class="hljs-string">"introduce"</span> /&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">ul</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"about_ul"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">li</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"about"</span>&gt;</span>名前：<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">li</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"about"</span>&gt;</span>会社：計装エンジニアリング<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">li</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"about"</span>&gt;</span>仕事：<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">li</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"about"</span>&gt;</span>趣味：<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
+</div></code></pre>
+<p>[CSS]</p>
+<pre class="hljs"><code><div>]<span class="hljs-selector-class">.about_img</span> {
+  <span class="hljs-attribute">text-align</span>: center;
+  <span class="hljs-attribute">width</span>: <span class="hljs-number">400px</span>;
+  <span class="hljs-attribute">margin-bottom</span>: <span class="hljs-number">20px</span>;
+}
+<span class="hljs-selector-class">.about</span> {
+  <span class="hljs-attribute">list-style</span>: none;
+  <span class="hljs-attribute">max-width</span>: <span class="hljs-number">400px</span>;
+  <span class="hljs-attribute">text-align</span>: left;
+  <span class="hljs-attribute">margin</span>: <span class="hljs-number">10px</span> auto;
+  <span class="hljs-attribute">font-size</span>: <span class="hljs-number">25px</span>;
+}
+<span class="hljs-selector-class">.content</span> {
+  <span class="hljs-attribute">max-width</span>: <span class="hljs-number">90%</span>;
+  <span class="hljs-attribute">text-align</span>: center;
+}
+</div></code></pre>
+</div>
+<br>
+<hr>
+<p><br><br><br></p>
+<h1 id="3-html-%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%81%AE%E4%BD%9C%E6%88%903">3. HTML ファイルの作成(3)</h1>
+<p>この章では、Works ページと Contact ページをコーディングして行きます。</p>
+<h3 id="%E2%97%8F-works-%E3%83%9A%E3%83%BC%E3%82%B8%E3%81%AE%E3%82%B3%E3%83%BC%E3%83%87%E3%82%A3%E3%83%B3%E3%82%B0">● Works ページのコーディング</h3>
+<p>works ページでは、画像をクリックするとコンテンツが表示される<br>
+「モーダルウィンドウ」を設計します。早速、演習に進みましょう。</p>
+<br>
+<div style="height:12px;">
+<span style="margin-left:8px; padding:6px 10px; background:lightgreen; color:black; font-weight:bold;border-radius:5px;-webkit-border-radius:5px;-moz-border-radius:5px;">演習 1</span>
+</div>
+<div style="border:3px solid lightgreen; padding:25px 12px 10px; font-size:0.85em;border-radius:5px;-webkit-border-radius:5px;-moz-border-radius:5px;">
+次のコードを works.html の bodyタグ内に記述しましょう。<br>
+また、div class="modal__content" 配下の pタグ内に、<br>
+自身の経歴や職歴を記述しましょう。<br>
+(pタグはクリック後に表示されるコンテンツです)<br>
+<p>[html]</p>
+<pre class="hljs"><code><div><span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"container content"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"js-modal-open"</span> <span class="hljs-attr">data-target</span>=<span class="hljs-string">"modal01"</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"box1"</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"../img/idea.png"</span> <span class="hljs-attr">alt</span>=<span class="hljs-string">""</span> /&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+
+  <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"modal01"</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"modal js-modal"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"modal__bg js-modal-close"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"modal__content"</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"js-modal-close"</span> <span class="hljs-attr">href</span>=<span class="hljs-string">""</span>&gt;</span>閉じる<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
+</div></code></pre>
+<p>[CSS]</p>
+<pre class="hljs"><code><div><span class="hljs-selector-class">.box1</span> {
+  <span class="hljs-comment">/*画像の枠線*/</span>
+  <span class="hljs-attribute">border</span>: <span class="hljs-number">1px</span> solid green;
+}
+
+<span class="hljs-selector-class">.container</span> {
+  <span class="hljs-comment">/*グリッドレイアウトの指定。今回は設定なし*/</span>
+  <span class="hljs-attribute">display</span>: grid;
+}
+
+<span class="hljs-selector-class">.modal</span> {
+  <span class="hljs-comment">/*モーダルウィンドウの全体設定*/</span>
+  <span class="hljs-attribute">display</span>: none;
+  <span class="hljs-attribute">height</span>: <span class="hljs-number">100vh</span>;
+  <span class="hljs-attribute">position</span>: fixed;
+  <span class="hljs-attribute">top</span>: <span class="hljs-number">0</span>;
+  <span class="hljs-attribute">width</span>: <span class="hljs-number">100%</span>;
+}
+<span class="hljs-selector-class">.modal__bg</span> {
+  <span class="hljs-comment">/*モーダルウィンドの背景設定*/</span>
+  <span class="hljs-attribute">background</span>: <span class="hljs-built_in">rgba</span>(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0.8</span>);
+  <span class="hljs-attribute">height</span>: <span class="hljs-number">100vh</span>;
+  <span class="hljs-attribute">position</span>: absolute;
+  <span class="hljs-attribute">width</span>: <span class="hljs-number">100%</span>;
+}
+<span class="hljs-selector-class">.modal__content</span> {
+  <span class="hljs-comment">/*モーダルウィンドウ内のコンテンツ*/</span>
+  <span class="hljs-attribute">background</span>: <span class="hljs-number">#fff</span>;
+  <span class="hljs-attribute">left</span>: <span class="hljs-number">50%</span>;
+  <span class="hljs-attribute">padding</span>: <span class="hljs-number">40px</span>;
+  <span class="hljs-attribute">position</span>: absolute;
+  <span class="hljs-attribute">top</span>: <span class="hljs-number">50%</span>;
+  <span class="hljs-attribute">transform</span>: <span class="hljs-built_in">translate</span>(-<span class="hljs-number">50%</span>, -<span class="hljs-number">50%</span>);
+  <span class="hljs-attribute">width</span>: <span class="hljs-number">60%</span>;
+}
+</div></code></pre>
+</div>
+<br>
+<h3 id="%E2%97%8Fcontact-%E3%83%9A%E3%83%BC%E3%82%B8%E3%81%AE%E3%82%B3%E3%83%BC%E3%83%87%E3%82%A3%E3%83%B3%E3%82%B0">●Contact ページのコーディング</h3>
+<p>Contact ページの課題は「メールフォーム」の作成です。<br>
+過去に学習した内容を思い出しながら、以下の演習を進めましょう。</p>
+<br>
+<div style="height:12px;">
+<span style="margin-left:8px; padding:6px 10px; background:lightgreen; color:black; font-weight:bold;border-radius:5px;-webkit-border-radius:5px;-moz-border-radius:5px;">演習 2</span>
+</div>
+<div style="border:3px solid lightgreen; padding:25px 12px 10px; font-size:0.85em;border-radius:5px;-webkit-border-radius:5px;-moz-border-radius:5px;">
+次のコードを記述し、メールフォームを作成しましょう。<br>
+(CSSのプロパティについては、コピー&ペーストでもOKです)
+<br>
+<p>[html]</p>
+<pre class="hljs"><code><div><span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
+  <span class="hljs-comment">&lt;!--画像の設置--&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"content"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"../img/mail.png"</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"contact_img"</span> <span class="hljs-attr">alt</span>=<span class="hljs-string">""</span> /&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+
+  <span class="hljs-comment">&lt;!--formタグ配下に各フォームを記述--&gt;</span>
+  <span class="hljs-comment">&lt;!--inputタグのclass属性とname属性を揃える--&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">form</span>&gt;</span>
+    <span class="hljs-comment">&lt;!--名前の入力欄--&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"item"</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">label</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"label"</span>&gt;</span>お名前<span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"inputs"</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"text"</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"name"</span> /&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+
+    <span class="hljs-comment">&lt;!--アドレスの入力欄--&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"item"</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">label</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"label"</span>&gt;</span>メールアドレス<span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"inputs"</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"email"</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"email"</span> /&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+
+    <span class="hljs-comment">&lt;!--メッセージの入力欄--&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"item"</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">label</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"label"</span>&gt;</span>メッセージ<span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">textarea</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"inputs"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">textarea</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+
+    <span class="hljs-comment">&lt;!--送信ボタン--&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"btn-area"</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"submit"</span> <span class="hljs-attr">value</span>=<span class="hljs-string">"送信する"</span> /&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">form</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
+</div></code></pre>
+<p>[CSS]</p>
+<pre class="hljs"><code><div><span class="hljs-comment">/* 画像のプロパティ */</span>
+<span class="hljs-selector-class">.contact_img</span> {
+  <span class="hljs-attribute">text-align</span>: center;
+  <span class="hljs-attribute">width</span>: <span class="hljs-number">300px</span>;
+}
+
+<span class="hljs-comment">/* フォーム全体のサイズと位置 */</span>
+<span class="hljs-selector-tag">form</span> {
+  <span class="hljs-attribute">width</span>: <span class="hljs-number">460px</span>;
+  <span class="hljs-attribute">margin</span>: <span class="hljs-number">0</span> auto;
+}
+
+<span class="hljs-comment">/* ボタン以外のフォームのプロパティ */</span>
+<span class="hljs-selector-class">.item</span> {
+  <span class="hljs-comment">/*要素がはみ出た時に非表示となる*/</span>
+  <span class="hljs-attribute">overflow</span>: hidden;
+  <span class="hljs-attribute">margin-bottom</span>: <span class="hljs-number">20px</span>;
+}
+
+<span class="hljs-comment">/*ラベルのプロパティ*/</span>
+<span class="hljs-selector-class">.label</span> {
+  <span class="hljs-attribute">float</span>: left;
+  <span class="hljs-attribute">margin-right</span>: <span class="hljs-number">20px</span>;
+  <span class="hljs-attribute">width</span>: <span class="hljs-number">135px</span>;
+  <span class="hljs-attribute">border-left</span>: solid <span class="hljs-number">3px</span> green;
+  <span class="hljs-attribute">padding-left</span>: <span class="hljs-number">10px</span>;
+}
+
+<span class="hljs-comment">/*入力欄の位置と幅*/</span>
+<span class="hljs-selector-class">.inputs</span> {
+  <span class="hljs-attribute">float</span>: left;
+  <span class="hljs-attribute">width</span>: <span class="hljs-number">300px</span>;
+}
+
+<span class="hljs-comment">/*名前とアドレス入力欄の見た目*/</span>
+<span class="hljs-selector-tag">input</span><span class="hljs-selector-attr">[type=<span class="hljs-string">"text"</span>]</span>,
+<span class="hljs-selector-tag">input</span><span class="hljs-selector-attr">[type=<span class="hljs-string">"email"</span>]</span> {
+  <span class="hljs-attribute">border</span>: solid <span class="hljs-number">1px</span> <span class="hljs-number">#aaa</span>;
+  <span class="hljs-attribute">border-radius</span>: <span class="hljs-number">5px</span>;
+  <span class="hljs-attribute">padding</span>: <span class="hljs-number">10px</span>;
+  <span class="hljs-attribute">font-size</span>: <span class="hljs-number">15px</span>;
+}
+
+<span class="hljs-comment">/*メッセージ入力欄の見た目*/</span>
+<span class="hljs-selector-tag">textarea</span> {
+  <span class="hljs-attribute">border</span>: solid <span class="hljs-number">1px</span> <span class="hljs-number">#aaa</span>;
+  <span class="hljs-attribute">border-radius</span>: <span class="hljs-number">5px</span>;
+  <span class="hljs-attribute">padding</span>: <span class="hljs-number">10px</span>;
+  <span class="hljs-attribute">height</span>: <span class="hljs-number">160px</span>;
+  <span class="hljs-attribute">font-size</span>: <span class="hljs-number">15px</span>;
+}
+
+<span class="hljs-comment">/*ボタンのプロパティ*/</span>
+<span class="hljs-selector-class">.btn-area</span> {
+  <span class="hljs-attribute">text-align</span>: center;
+}
+
+<span class="hljs-comment">/*ボタンのプロパティ*/</span>
+<span class="hljs-selector-tag">input</span><span class="hljs-selector-attr">[type=<span class="hljs-string">"submit"</span>]</span> {
+  <span class="hljs-attribute">background</span>: green;
+  <span class="hljs-attribute">border</span>: none;
+  <span class="hljs-attribute">color</span>: white;
+  <span class="hljs-attribute">font-size</span>: <span class="hljs-number">17px</span>;
+  <span class="hljs-attribute">font-weight</span>: bold;
+  <span class="hljs-attribute">padding</span>: <span class="hljs-number">10px</span> <span class="hljs-number">25px</span>;
+  <span class="hljs-attribute">border-radius</span>: <span class="hljs-number">0%</span>;
+  <span class="hljs-attribute">margin</span>: <span class="hljs-number">0</span> <span class="hljs-number">5px</span>;
+  <span class="hljs-attribute">cursor</span>: pointer;
+}
+</div></code></pre>
+</div>
+<br>
+<hr>
+<p><br><br><br></p>
+<h1 id="4-jquery-%E3%81%AE%E3%82%B3%E3%83%BC%E3%83%87%E3%82%A3%E3%83%B3%E3%82%B0">4. jQuery のコーディング</h1>
+<h2 id="%E2%97%86work-%E3%83%9A%E3%83%BC%E3%82%B8%E3%81%AE-jquery">◆Work ページの jQuery</h2>
+<p>このページでは、モーダルウィンドウを設定する jQuery を<br>
+記述して行きます。少し複雑なので、ゆっくり理解して行きましょう。</p>
+<br>
+<h4 id="%E3%83%A2%E3%83%BC%E3%83%80%E3%83%AB%E3%82%A6%E3%82%A3%E3%83%B3%E3%83%89%E3%82%A6%E3%81%A8%E3%81%AF">モーダルウィンドウとは</h4>
+<p>モーダルウィンドウとは、リンクや画像などのコンテンツを<br>
+クリックした際に、前面に出現するウィンドウです。<br>
+別のページに遷移する事なく、新たなコンテンツを表示できます。</p>
+<p>モーダルウィンドウの機能を実装するためには、以下の条件が必要です。<br>
+(1) クリックすると、新しい画面が表示される。<br>
+(2) 背景に少し透明度があり、コンテンツが表示されている。<br>
+(3) ボタン または ウインドウの外をクリックすると消える。</p>
+<br>
+<h4 id="%E3%83%A2%E3%83%BC%E3%83%80%E3%83%AB%E3%82%A6%E3%82%A3%E3%83%B3%E3%83%89%E3%82%A6%E3%81%AE%E5%AE%9F%E8%A3%85">モーダルウィンドウの実装</h4>
+<p>上記のしくみを実装するためには、次のような機能が必要です。<br>
+(1) 通常は非表示の画面(レイヤー)が、クリックで表示される<br>
+(2) レイヤー上のコンテンツを html と css に記述する<br>
+(3) ボタンと 背景をクリックすると、レイヤーが再び非表示になる</p>
+<p>次の演習では、(1)と(3)を jQuery で設定していきます。</p>
+<br>
+<div style="height:12px;">
+<span style="margin-left:8px; padding:6px 10px; background:lightgreen; color:black; font-weight:bold;border-radius:5px;-webkit-border-radius:5px;-moz-border-radius:5px;">演習 1</span>
+</div>
+<div style="border:2px solid lightgreen; padding:25px 12px 10px; font-size:0.85em;border-radius:5px;-webkit-border-radius:5px;-moz-border-radius:5px;">
+以下のコードを jquery.jsファイルに記述しましょう。<br>
+(return falseの説明は、<a href="https://www.tam-tam.co.jp/tipsnote/javascript/post5050.html" target="_blank">こちら</a>が分かりやすいです)
+<pre class="hljs"><code><div><span class="hljs-comment">//works</span>
+$(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
+  <span class="hljs-comment">//js-modal-open属性のオブジェクトに対して、</span>
+  <span class="hljs-comment">//クリック時にフェードインさせる機能を付与</span>
+  $(<span class="hljs-string">".js-modal-open"</span>).each(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
+    $(<span class="hljs-keyword">this</span>).on(<span class="hljs-string">"click"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
+      <span class="hljs-keyword">var</span> target = $(<span class="hljs-keyword">this</span>).data(<span class="hljs-string">"target"</span>);
+      <span class="hljs-keyword">var</span> modal = <span class="hljs-built_in">document</span>.getElementById(target);
+      $(modal).fadeIn();
+
+      <span class="hljs-comment">//イベントを別の要素に渡す前に終了</span>
+      <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+    });
+  });
+
+  <span class="hljs-comment">//js-modal-close属性のオブジェクトに対して、</span>
+  <span class="hljs-comment">//クリック時に js-modal属性を持つコンテンツを</span>
+  <span class="hljs-comment">//フェードアウトさせる機能を付与</span>
+  $(<span class="hljs-string">".js-modal-close"</span>).on(<span class="hljs-string">"click"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
+    $(<span class="hljs-string">".js-modal"</span>).fadeOut();
+
+    <span class="hljs-comment">//イベントを別の要素に渡す前に終了</span>
+    <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+  });
+});
+</div></code></pre>
+</div>
+<p><br><br></p>
+<p>今回はここまです。お疲れ様でした！</p>
+<p><a href="https://masashi-m.github.io/text_htmlcss_06/.">HTML/CSS 学習テキスト(6)へ</a></p>
+
+</body>
+</html>
